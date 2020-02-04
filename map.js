@@ -19,13 +19,13 @@
 
         //Width and height of map
         var width = 960;
-        var height = 500;
+        var height = 590;
         
 
         // D3 Projection
         var projection = d3.geo.albersUsa()
             .translate([width / 2, height / 2])    // translate to center of screen
-            .scale([1000]);          // scale things down so see entire US
+            .scale([800]);          // scale things down so see entire US
 
         // Define path generator
         var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
@@ -34,9 +34,11 @@
 
         // Define linear scale for output
         var color = d3.scale.linear()
-            .range(["#ffffb2", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#b10026"]);
+            .range(["#ffffb2","#ffffb2", "#f7e0a2", "#eec091", "#e6a181", "#de8170", "#d56260", "#cd424f","#c4233f", "#bc032e"]);
 
-        var legendText = [">200 ($ / month)","180 - 200","150 - 180", "130 - 150", "110 - 130", "<110"];
+        var legendText = ["200+","146","138","130","122","114","106", "98","90","0"];
+
+
 
         //Create SVG element and append map to the SVG
         var svg = d3.select("#map")
@@ -58,7 +60,7 @@
 
         // Load in my states data!
         d3.csv("electricity.csv", function (data) {
-            color.domain([90, 110, 130, 150, 180, 200]); // setting the range of the input data
+            color.domain([0, 90, 98, 106, 114, 122, 130, 138, 146, 154]); // setting the range of the input data
 
             // Load GeoJSON data and merge with states data
             d3.json("us-states.json", function (json) {
@@ -119,11 +121,11 @@
                             value="<span style='color: #ff0007'>"+parseFloat(d.properties['prcnt_change'])+"%</span>";
                             else value="<span style='color: #008002'>"+parseFloat(d.properties['prcnt_change'])+"%</span>";
                             let html="<div style='padding: 3px; text-align: left; color: black; font-size: 14px; font-weight: 400; opacity: .9; background-color: #f1f1f1; border-radius: 3px'>" +
-                                "<h3 style='margin: 0; text-align: center; text-decoration: underline; margin-bottom: 5px'>" +d.properties['name']+ "</h3>" +
-                            "<p style='padding: 0; margin: 0'><b style='color:orange'>2018</b>: " + d.properties['avg_2018'] + " ¢/kWh</p>" +
-                            "<p style='padding: 0; margin: 0'><b style='color:orange'>2019</b>: " + d.properties['avg_2019'] + " ¢/kWh</p>" +
-                            "<p style='padding: 0; margin: 0'><b style='color:orange'>Change in 2019</b>: " + value + "</p>" +
-                            "<p style='padding: 0; margin: 0'><b style='color:orange'>Avg monthly Bill:</b> $." + d.properties['month_rate'] + "</p>" +
+                                "<h3>" +d.properties['name']+ "</h3>" +
+                            "<p class='tooltip-category'><b style='color:darkblue'>2018</b>: " + d.properties['avg_2018'] + " ¢/kWh</p>" +
+                            "<p class='tooltip-category'><b style='color:darkblue'>2019</b>: " + d.properties['avg_2019'] + " ¢/kWh</p>" +
+                            "<p class='tooltip-category'><b style='color:darkblue'>Change in 2019</b>: " + value + "</p>" +
+                            "<p class='tooltip-category'><b style='color:darkblue'>Avg monthly Bill:</b> $." + d.properties['month_rate'] + "</p>" +
                             "</div>";
 
                         tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
@@ -157,29 +159,37 @@
 
                 
                 
-                
-                // Modified Legend Code from Mike Bostock: http://bl.ocks.org/mbostock/3888852
-                var legend = d3.select("body").append("svg")
-                    .attr("class", "legend")
-                    .attr("width", 140)
-                    .attr("height", 200)
+            
+
+                var legend2 = d3.select("#legend").append("svg")
+                    .attr("class", "legend2")
+                    .attr("width", 915)
+                    .attr("height", 40)
                     .selectAll("g")
                     .data(color.domain().slice().reverse())
                     .enter()
-                    .append("g")
-                    .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
-                
-                legend.append("rect")
-                    .attr("width", 18)
-                    .attr("height", 18)
-                    .style("fill", color);
+                    .append("g");
 
-                legend.append("text")
+                
+                legend2.append("rect")
+                    .attr("width", 100)
+                    .attr("height", 12)
+                    .attr("y", 30)
+                    .attr("x", 12)
+                    .style("fill", color)
+                    .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; });
+
+
+                legend2.append("text")
                     .data(legendText)
-                    .attr("x", 24)
-                    .attr("y", 9)
-                    .attr("dy", ".35em")
-                    .text(function (d) { return d; });
+                    .attr("y", 20)
+                    .attr("x", 12)
+                    .attr("text-anchor","middle")
+                    .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; })
+                    .text(function (d) { return d; })
+                    ;
+                     
+                
             });
 
         });
