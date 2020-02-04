@@ -30,11 +30,7 @@
         }
 
         /* Legend Position Style */
-        .legend {
-            position: absolute;
-            right: 50px;
-            bottom: 10px;
-        }
+
         
 
         .state_text{
