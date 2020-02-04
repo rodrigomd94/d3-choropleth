@@ -1,0 +1,51 @@
+/* On mouse hover, lighten state color */
+        path:hover {
+            fill-opacity: .7;
+        }
+
+        /* Style for Custom Tooltip */
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 60px;
+            height: 28px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: white;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        /* Legend Font Style */
+        body {
+            font: 11px sans-serif;
+            text-align: center;
+            background-color:#0505ff41;
+        }
+
+        /* Legend Position Style */
+        .legend {
+            position: absolute;
+            right: 50px;
+            bottom: 10px;
+        }
+
+        .state_text{
+            font-weight: 800;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        .state:hover {
+            fill: none;
+            fill-opacity: 0.2;
+            /*cursor: default;*/
+            stroke-width: 3px;
+        }
+        div.tooltip {
+            color: #000000;
+            border-radius: 5px;
+            /*opacity: 0.9;*/
+            position: absolute;
+            width: 200px;
+            /*pointer-events: none;*/
+        }
