@@ -13,7 +13,7 @@
 
         //Width and height of map
         var width = 960;
-        var height = 590;
+        var height = 570;
         
 
         // D3 Projection
@@ -38,8 +38,7 @@
         var svg = d3.select("#map")
             .append("svg")
             .attr("class", "svg")
-            .attr("width", width)
-            .attr("height", height);
+            .attr("viewBox", `0 0 ${width} ${height}`);
 
         // Append Div for tooltip to SVG
         var div = d3.select("body")
@@ -168,6 +167,7 @@
                 legend.append("rect")
                     .attr("width", 100)
                     .attr("height", 12)
+                    .attr("viewBox", `0 0 100 12`)
                     .attr("y", 30)
                     .attr("x", 12)
                     .style("fill", color)
