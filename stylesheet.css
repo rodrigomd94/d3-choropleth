@@ -47,5 +47,6 @@
             /*opacity: 0.9;*/
             position: absolute;
             width: 200px;
+            visibility: hidden;
             /*pointer-events: none;*/
         }
