@@ -28,7 +28,7 @@
 
         // Define linear scale for output
         var color = d3.scale.linear()
-            .range(["#ffffb2","#ffffb2", "#f7e0a2", "#eec091", "#e6a181", "#de8170", "#d56260", "#cd424f","#c4233f", "#bc032e"]);
+            .range(["#ffffcc","#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c","#bd0026", "#800026"]);
 
         var legendText = ["200+","146","138","130","122","114","106", "98","90","0"];
 
@@ -54,7 +54,7 @@
 
         // Load in my states data!
         d3.csv("electricity.csv", function (data) {
-            color.domain([0, 90, 98, 106, 114, 122, 130, 138, 146, 154]); // setting the range of the input data
+            color.domain([0, 90, 98, 106, 114, 122, 130, 138, 146, 300]); // setting the range of the input data
 
             // Load GeoJSON data and merge with states data
             d3.json("us-states.json", function (json) {
