@@ -1,10 +1,4 @@
 
-        /* window.addEventListener('load', (event) => {
-            let div = document.createElement('div');
-            div.setAttribute("id", "tip");
-            document.querySelector("body").appendChild(div);
-        }); */
-
         /*  This visualization was made possible by modifying code provided by:
         
         Scott Murray, Choropleth example from "Interactive Data Visualization for the Web" 
@@ -161,8 +155,8 @@
                 
             
 
-                var legend2 = d3.select("#legend").append("svg")
-                    .attr("class", "legend2")
+                var legend = d3.select("#legend").append("svg")
+                    .attr("class", "legend")
                     .attr("width", 915)
                     .attr("height", 40)
                     .selectAll("g")
@@ -171,7 +165,7 @@
                     .append("g");
 
                 
-                legend2.append("rect")
+                legend.append("rect")
                     .attr("width", 100)
                     .attr("height", 12)
                     .attr("y", 30)
@@ -180,7 +174,7 @@
                     .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; });
 
 
-                legend2.append("text")
+                legend.append("text")
                     .data(legendText)
                     .attr("y", 20)
                     .attr("x", 12)
