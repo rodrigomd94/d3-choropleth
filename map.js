@@ -1,9 +1,9 @@
 
-        window.addEventListener('load', (event) => {
+        /* window.addEventListener('load', (event) => {
             let div = document.createElement('div');
             div.setAttribute("id", "tip");
             document.querySelector("body").appendChild(div);
-        });
+        }); */
 
         /*  This visualization was made possible by modifying code provided by:
         
@@ -111,7 +111,7 @@
                             return "rgb(213,222,217)";
                         }
                     })
-                    .on("mouseover", () => tooltip.classed("hidden", false))
+                    .on("mouseover", () => tooltip.style('visibility', 'visible'))
                     .on("mousemove", (d) => {
                         let value;
                         if(parseFloat(d.properties['prcnt_change'])>=0)
@@ -129,7 +129,7 @@
                         tooltip.html(html);
                     })
                     .on("mouseout", (d) => {
-                        tooltip.classed("hidden", true)
+                        tooltip.style('visibility', 'hidden');
                     });
 
                 svg.selectAll("text")
