@@ -20,8 +20,14 @@
         /* Legend Font Style */
         body {
             font: 11px sans-serif;
-            text-align: center;
             background-color:#0505ff41;
+            margin: 0px;
+            padding: 0px;
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+            text-align: center;
+
         }
 
         /* Legend Position Style */
@@ -50,3 +56,15 @@
             visibility: hidden;
             /*pointer-events: none;*/
         }
+         .map{
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        } 
+        .svg{
+            display: inline-block;
+            vertical-align: middle;
+        }
+     
