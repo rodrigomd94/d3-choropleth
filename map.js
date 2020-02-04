@@ -39,8 +39,9 @@
         var legendText = [">200 ($ / month)","180 - 200","150 - 180", "130 - 150", "110 - 130", "<110"];
 
         //Create SVG element and append map to the SVG
-        var svg = d3.select("body")
+        var svg = d3.select("#map")
             .append("svg")
+            .attr("class", "svg")
             .attr("width", width)
             .attr("height", height);
 
