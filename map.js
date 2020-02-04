@@ -168,6 +168,7 @@
                 legend.append("rect")
                     .attr("width", 100)
                     .attr("height", 12)
+                    .attr("viewBox", `0 0 100 12`)
                     .attr("y", 30)
                     .attr("x", 12)
                     .style("fill", color)
