@@ -9,7 +9,10 @@
         
         Mike Bostock, Pie Chart Legend
         http://bl.ocks.org/mbostock/3888852  */
+        //zoom function
 
+
+        
 
         //Width and height of map
         var width = 960;
@@ -17,17 +20,17 @@
         
 
         // D3 Projection
-        var projection = d3.geo.albersUsa()
+        var projection = d3.geoAlbersUsa()
             .translate([width / 2, height / 2])    // translate to center of screen
             .scale([825]);          // scale things down so see entire US
 
         // Define path generator
-        var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
+        var path = d3.geoPath()               // path generator that will convert GeoJSON to SVG paths
             .projection(projection);  // tell path generator to use albersUsa projection
 
 
         // Define linear scale for output
-        var color = d3.scale.linear()
+        var color = d3.scaleLinear()
             .range(["#ffffcc","#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c","#bd0026", "#800026"]);
 
         var legendText = ["200+","146","138","130","122","114","106", "98","90","0"];
@@ -48,8 +51,27 @@
         var tooltip = d3.select('body')
                 .append('div')
                 .attr('class', 'tooltip');
+
+                
+        var zoom = d3.zoom()
+        .on('zoom', function() {
+            canvas.attr('transform', d3.event.transform);
+        });
+
+        var canvas = svg
+            .call(zoom)
+            .attr("viewBox", `0 0 ${width} ${height}`)
+            .insert('g', ':first-child');
         
+        d3.select('#zoom-in').on('click', function() {
+            // Smooth zooming
+            zoom.scaleBy(svg.transition().duration(750), 1.3);
+            });
             
+            d3.select('#zoom-out').on('click', function() {
+            // Ordinal zooming
+            zoom.scaleBy(svg, 1 / 1.3);
+            });
 
         // Load in my states data!
         d3.csv("electricity.csv", function (data) {
@@ -88,7 +110,7 @@
                 }
 
                 // Bind the data to the SVG and create one path per GeoJSON feature
-                svg.selectAll("path")
+                canvas.selectAll("path")
                     .data(json.features)
                     .enter()
                     .append("path")
@@ -128,7 +150,7 @@
                         tooltip.style('visibility', 'hidden');
                     });
 
-                svg.selectAll("text")
+                canvas.selectAll("text")
                     .data(json.features)
                     .enter()
                     .append("svg:text")
