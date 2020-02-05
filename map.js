@@ -136,7 +136,7 @@ d3.csv("electricity.csv", function (data) {
             slide: function (event, ui) {
                 minMonth = $("#month-slider").slider("values", 0);
                 maxMonth = $("#month-slider").slider("values", 1);
-                $("#month-amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                $("#month-amount").val("$." + ui.values[0] + " - $." + ui.values[1]);
                 setTimeout(setColor(filterJson(json, minMonth, maxMonth, min2018, max2018, min2019, max2019, minIncrease, maxIncrease)), 10);
 
             }
@@ -154,15 +154,15 @@ d3.csv("electricity.csv", function (data) {
             slide: function (event, ui) {
                 min2018 = $("#2018-slider").slider("values", 0);
                 max2018 = $("#2018-slider").slider("values", 1);
-                $("#2018-amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                $("#2018-amount").val(ui.values[0] + " - " + ui.values[1]+" ¢/kWh");
                 setTimeout(setColor(filterJson(json, minMonth, maxMonth, min2018, max2018, min2019, max2019, minIncrease, maxIncrease)), 10);
 
 
             }
 
         });
-        $("#2018-amount").val("$" + min2018 +
-         " - $" + max2018);
+        $("#2018-amount").val(min2018 +
+         " - " + max2018+ " ¢/kWh");
 
          // ----------2019 price filter
         
@@ -174,15 +174,15 @@ d3.csv("electricity.csv", function (data) {
             slide: function (event, ui) {
                 min2019 = $("#2019-slider").slider("values", 0);
                 max2019 = $("#2019-slider").slider("values", 1);
-                $("#2019-amount").val(ui.values[0] + "% - " + ui.values[1]+"%");
+                $("#2019-amount").val(ui.values[0] + " - " + ui.values[1]+" ¢/kWh");
                 setTimeout(setColor(filterJson(json, minMonth, maxMonth, min2018, max2018, min2019, max2019, minIncrease, maxIncrease)), 10);
 
 
             }
 
         });
-        $("#2019-amount").val("$" + min2019 +
-         " - $" + max2019);
+        $("#2019-amount").val(min2019 +
+         " - " + max2019 + " ¢/kWh");
 
          // ----------price increase filter
         
