@@ -5,13 +5,62 @@
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+
 </head>
 
 <body>
-    
-    <div style="z-index: 2; padding: 2px; padding-right: 30px; position: absolute; left: 0px; background: linear-gradient(90deg, rgba(177,0,38,1) 25%, rgba(245,127,103,1) 65%, rgba(245,127,103,0) 100%);" >
-        <img src="electric-rate-logo.png" style=" height: 12vmin; "/>
+    <button id="filterButton" style="font-size:30px;cursor:pointer; z-index: 2" onclick="openNav()"><i
+            class="fa fa-filter"></i></button>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <table style="margin-top: 5vmin">
+            <tbody id="filterWrapper">
+                <tr class="filters">
+                    <td id="month-filter">
+                        <label for="month-amount" class="filterLabel">Price range:</label>
+                        <input class="amount-label" type="text" id="month-amount" readonly>
+
+                        <div class="slider" id="month-slider"></div>
+                    </td>
+                </tr>
+                <tr class="filters">
+                    <td id="2018-filter">
+                        <label for="2018-amount" class="filterLabel">2018 rates:</label>
+                        <input class="amount-label" type="text" id="2018-amount" readonly>
+
+                        <div class="slider" id="2018-slider"></div>
+                    </td>
+                </tr>
+                <tr class="filters">
+                    <td id="2019-filter">
+                        <label for="2019-amount" class="filterLabel">2019 rates:</label>
+                        <input class="amount-label" type="text" id="2019-amount" readonly>
+
+                        <div class="slider" id="2019-slider"></div>
+                    </td>
+                </tr>
+                <tr class="filters">
+                    <td id="increase-filter">
+                        <label for="increase-amount" class="filterLabel">Price increase:</label>
+                        <input class="amount-label" type="text" id="increase-amount" readonly>
+
+                        <div class="slider" id="increase-slider"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+    <div
+        style="z-index: 2; padding: 2px; padding-right: 30px; position: absolute; left: 0px; background: linear-gradient(90deg, rgba(177,0,38,1) 25%, rgba(245,127,103,1) 65%, rgba(245,127,103,0) 100%);">
+        <img src="electric-rate-logo.png" style="height: 12vmin; " />
+    </div>
+
     <div class="map" id="map"></div>
     <div class="zoomBox">
         <svg viewBox="0 0 70 60">
@@ -24,8 +73,8 @@
                 <g id="zoom-out" transform="translate(30, 0)">
                     <rect width="30" height="30"></rect>
                     <line x1="5" y1="15" x2="25" y2="15"></line>
-                </g>     
-            
+                </g>
+
             </g>
         </svg>
     </div>
