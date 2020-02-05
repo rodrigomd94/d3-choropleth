@@ -73,3 +73,25 @@
             transform: translate(-50%, 0);
             width: 70vw;
         }
+
+       
+          g.zoom-controls {
+              
+              cursor: pointer;
+              pointer-events: all;
+          }
+          g.zoom-controls rect {
+              fill: white;
+              stroke: #596877;
+              stroke-width: 1;
+          }
+          g.zoom-controls line {
+              stroke: #596877;
+              stroke-width: 2;
+          }
+          .zoomBox{
+            margin: 5px;
+            position: absolute;
+            right: 10px;
+            width: 10vmin;
+          }
