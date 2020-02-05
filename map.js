@@ -156,8 +156,6 @@
 
                 var legend = d3.select("#legend").append("svg")
                     .attr("class", "legend")
-                    .attr("width", 915)
-                    .attr("height", 40)
                     .attr("viewBox", `0 0 915 40`)
                     .selectAll("g")
                     .data(color.domain().slice().reverse())
@@ -168,7 +166,6 @@
                 legend.append("rect")
                     .attr("width", 100)
                     .attr("height", 12)
-                    .attr("viewBox", `0 0 100 12`)
                     .attr("y", 30)
                     .attr("x", 12)
                     .style("fill", color)
