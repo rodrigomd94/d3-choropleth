@@ -3,15 +3,32 @@
 
 <head>
     <meta charset="utf-8">
-    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-    <div style="padding: 2px; padding-right: 30px; position: absolute; left: 0px; background: linear-gradient(90deg, rgba(177,0,38,1) 25%, rgba(245,127,103,1) 65%, rgba(245,127,103,0) 100%);" >
+    
+    <div style="z-index: 2; padding: 2px; padding-right: 30px; position: absolute; left: 0px; background: linear-gradient(90deg, rgba(177,0,38,1) 25%, rgba(245,127,103,1) 65%, rgba(245,127,103,0) 100%);" >
         <img src="electric-rate-logo.png" style=" height: 12vmin; "/>
     </div>
     <div class="map" id="map"></div>
+    <div class="zoomBox">
+        <svg viewBox="0 0 70 60">
+            <g class="zoom-controls" transform="translate(10, 10)">
+                <g id="zoom-in" transform="translate(0, 0)">
+                    <rect width="30" height="30"></rect>
+                    <line x1="5" y1="15" x2="25" y2="15"></line>
+                    <line x1="15" y1="5" x2="15" y2="25"></line>
+                </g>
+                <g id="zoom-out" transform="translate(30, 0)">
+                    <rect width="30" height="30"></rect>
+                    <line x1="5" y1="15" x2="25" y2="15"></line>
+                </g>     
+            
+            </g>
+        </svg>
+    </div>
     <div id="legend"></div>
     <script src="map.js"></script>
 </body>
