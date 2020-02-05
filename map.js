@@ -19,7 +19,7 @@
         // D3 Projection
         var projection = d3.geo.albersUsa()
             .translate([width / 2, height / 2])    // translate to center of screen
-            .scale([800]);          // scale things down so see entire US
+            .scale([825]);          // scale things down so see entire US
 
         // Define path generator
         var path = d3.geo.path()               // path generator that will convert GeoJSON to SVG paths
@@ -156,7 +156,7 @@
 
                 var legend = d3.select("#legend").append("svg")
                     .attr("class", "legend")
-                    .attr("viewBox", `0 0 920 40`)
+                    .attr("viewBox", `0 0 930 40`)
                     .selectAll("g")
                     .data(color.domain().slice().reverse())
                     .enter()
@@ -167,7 +167,7 @@
                     .attr("width", 100)
                     .attr("height", 12)
                     .attr("y", 30)
-                    .attr("x", 15)
+                    .attr("x", 21)
                     .style("fill", color)
                     .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; });
 
@@ -175,9 +175,10 @@
                 legend.append("text")
                     .data(legendText)
                     .attr("y", 20)
-                    .attr("x", 15)
+                    .attr("x", 21)
                     .attr("text-anchor","middle")
-                    .style("font-size", "1vw")
+                    .style("font-size", "3vmin")
+                    .style("font-weight", "lighter")
                     .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; })
                     .text(function (d) { return d; })
                     ;
