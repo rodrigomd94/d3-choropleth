@@ -18,6 +18,8 @@ http://bl.ocks.org/mbostock/3888852  */
 var width = 960;
 var height = 570;
 
+var display2018='block;';
+
 
 // D3 Projection
 var projection = d3.geoAlbersUsa()
@@ -195,7 +197,7 @@ d3.csv("electricity.csv", function (data) {
             slide: function (event, ui) {
                 minIncrease = $("#increase-slider").slider("values", 0);
                 maxIncrease = $("#increase-slider").slider("values", 1);
-                $("#increase-amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                $("#increase-amount").val(ui.values[0] + "% - " + ui.values[1])+"%";
                 setTimeout(setColor(filterJson(json, minMonth, maxMonth, min2018, max2018, min2019, max2019, minIncrease, maxIncrease)), 10);
 
 
@@ -232,13 +234,14 @@ d3.csv("electricity.csv", function (data) {
             .attr("y", 20)
             .attr("x", 24)
             .attr("text-anchor", "middle")
-            .style("font-size", "3vmin")
+            .style("font-size", "2vmin")
             .style("font-weight", "lighter")
             .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; })
             .text(function (d) { return d; })
             ;
 
     });
+    
 
 
 });
@@ -259,7 +262,7 @@ function drawBasemap(json) {
             else value = "<span style='color: #008002'>" + parseFloat(d.properties['prcnt_change']) + "%</span>";
             let html = "<div style='padding: 3px; text-align: left; color: black; font-size: 14px; font-weight: 400; opacity: .9; background-color: #f1f1f1; border-radius: 3px'>" +
                 "<h3>" + d.properties['name'] + "</h3>" +
-                "<p class='tooltip-category'><b style='color:darkblue'>2018</b>: " + d.properties['avg_2018'] + " ¢/kWh</p>" +
+                "<p class='tooltip-category' id='2018-tooltip' style='display:"+display2018+"'><b style='color:darkblue;'>2018</b>: " + d.properties['avg_2018'] + " ¢/kWh</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>2019</b>: " + d.properties['avg_2019'] + " ¢/kWh</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>Change in 2019</b>: " + value + "</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>Avg monthly Bill:</b> $." + d.properties['month_rate'] + "</p>" +
@@ -293,6 +296,7 @@ function drawBasemap(json) {
             return path.centroid(d)[1];
         })
         .attr("class", "state_text");
+        
 }
 
 
@@ -345,6 +349,17 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("filterButton").style.visibility="visible";
+}
+function remove2018(checkbox){
+    if (!checkbox.checked){
+        $("#2018-filter").css("display", "none");
+        $("#2018-tooltip").css("display", "none");
+        display2018="none;"
+    }else{
+        $("#2018-filter").css("display", "inline-block");
+        $("#2018-tooltip").css("display", "inline-block");
+        display2018="block;"
+    }
 }
 
 
