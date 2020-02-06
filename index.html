@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <title>Electricity Rates Map</title>
+
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
@@ -29,7 +31,8 @@
                     </td>
                 </tr>
                 <tr class="filters">
-                    <td id="2018-filter">
+                    <td id="2018-filter">¨
+                        <!-- <a href="#" id="hide2018">hide</a> -->
                         <label for="2018-amount" class="filterLabel">2018 rates:</label>
                         <input class="amount-label" type="text" id="2018-amount" readonly>
 
@@ -50,6 +53,13 @@
                         <input class="amount-label" type="text" id="increase-amount" readonly>
 
                         <div class="slider" id="increase-slider"></div>
+                    </td>
+                </tr>
+                <tr class="filters">
+                    <td >
+                        <input id="2018-checkbox" type="checkbox" value="2018" onclick="remove2018(this)" checked="checked">
+                        <label for="2018-checkbox" class="filterLabel">2018 Prices</label>
+                        
                     </td>
                 </tr>
             </tbody>
