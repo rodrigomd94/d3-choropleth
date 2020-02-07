@@ -35,7 +35,7 @@ var path = d3.geoPath()               // path generator that will convert GeoJSO
 var color = d3.scaleLinear()
     .range(["#ffffcc", "#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#bd0026", "#800026"]);
 
-var legendText = ["33 ¢/kWh", "26", "22", "28", "14", "12", "11", "10", "9", "0"];
+var legendText = ["33 ¢/kWh", "26", "22", "18","16", "14", "12", "11", "10", "0"];
 
 
 
@@ -77,7 +77,7 @@ d3.select('#zoom-out').on('click', function () {
 
 // Load in my states data!
 d3.csv("electricity.csv", function (data) {
-    color.domain([0, 9, 10, 11, 12, 14, 18, 22, 26, 33]); // setting the range of the input data
+    color.domain([0, 10, 11, 12, 14, 16, 18, 22, 26, 33]); // setting the range of the input data
 
     // Load GeoJSON data and merge with states data
     d3.json("us-states.json", function (json) {
