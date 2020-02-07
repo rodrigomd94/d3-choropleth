@@ -201,7 +201,7 @@ d3.csv("electricity.csv", function (data) {
 
         var legend = d3.select("#legend").append("svg")
             .attr("class", "legend")
-            .attr("viewBox", `0 0 950 45`)
+            .attr("viewBox", `0 0 960 45`)
             .selectAll("g")
             .data(color.domain().slice().reverse())
             .enter()
@@ -212,7 +212,7 @@ d3.csv("electricity.csv", function (data) {
             .attr("width", 100)
             .attr("height", 12)
             .attr("y", 30)
-            .attr("x", 35)
+            .attr("x", 40)
             .style("fill", color)
             .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; });
 
@@ -220,7 +220,7 @@ d3.csv("electricity.csv", function (data) {
         legend.append("text")
             .data(legendText)
             .attr("y", 20)
-            .attr("x", 35)
+            .attr("x", 40)
             .attr("text-anchor", "middle")
             .style("font-size", "2vmin")
             .style("font-weight", "lighter")
