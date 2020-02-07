@@ -19,9 +19,10 @@ var path = d3.geoPath()               // path generator that will convert GeoJSO
 
 // Define linear scale for output
 var color = d3.scaleLinear()
-    .range(["#ffffcc", "#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#bd0026", "#800026"]);
+    .range(["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c",  "#feb24c", "#fed976", "#ffeda0", "#ffffcc"]);
+    
 
-var legendText = ["33 ¢/kWh", "26", "22", "18","16", "14", "12", "11", "10", "0"];
+var legendText = ["10","11", "12","14", "16","18","22", "26", "33 ¢/kWh"];
 
 
 
@@ -63,7 +64,7 @@ d3.select('#zoom-out').on('click', function () {
 
 // Load in my states data!
 d3.csv("electricity.csv", function (data) {
-    color.domain([0, 10, 11, 12, 14, 16, 18, 22, 26, 33]); // setting the range of the input data
+    color.domain([33, 26, 22, 18, 16, 14, 12, 11, 10]); // setting the range of the input data
 
     // Load GeoJSON data and merge with states data
     d3.json("us-states.json", function (json) {
@@ -124,7 +125,7 @@ d3.csv("electricity.csv", function (data) {
             slide: function (event, ui) {
                 minMonth = $("#month-slider").slider("values", 0);
                 maxMonth = $("#month-slider").slider("values", 1);
-                $("#month-amount").val("$." + ui.values[0] + " - $." + ui.values[1]);
+                $("#month-amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
                 setTimeout(setColor(filterJson(json, minMonth, maxMonth, min2018, max2018, min2019, max2019, minIncrease, maxIncrease)), 10);
 
             }
@@ -201,7 +202,7 @@ d3.csv("electricity.csv", function (data) {
 
         var legend = d3.select("#legend").append("svg")
             .attr("class", "legend")
-            .attr("viewBox", `0 0 960 45`)
+            .attr("viewBox", `0 0 980 45`)
             .selectAll("g")
             .data(color.domain().slice().reverse())
             .enter()
@@ -212,7 +213,7 @@ d3.csv("electricity.csv", function (data) {
             .attr("width", 100)
             .attr("height", 12)
             .attr("y", 30)
-            .attr("x", 40)
+            .attr("x", 15)
             .style("fill", color)
             .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; });
 
@@ -220,7 +221,7 @@ d3.csv("electricity.csv", function (data) {
         legend.append("text")
             .data(legendText)
             .attr("y", 20)
-            .attr("x", 40)
+            .attr("x", 115)
             .attr("text-anchor", "middle")
             .style("font-size", "2vmin")
             .style("font-weight", "lighter")
@@ -253,7 +254,7 @@ function drawBasemap(json) {
                 "<p class='tooltip-category' id='2018-tooltip' style='display:"+display2018+"'><b style='color:darkblue;'>2018</b>: " + d.properties['avg_2018'] + " ¢/kWh</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>2019</b>: " + d.properties['avg_2019'] + " ¢/kWh</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>Change</b>: " + value + "</p>" +
-                "<p class='tooltip-category'><b style='color:darkblue'>Avg monthly Bill:</b> $." + d.properties['month_rate'] + "</p>" +
+                "<p class='tooltip-category'><b style='color:darkblue'>Avg monthly Bill:</b> $" + d.properties['month_rate'] + "</p>" +
                 "</div>";
 
             tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
