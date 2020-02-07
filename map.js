@@ -35,7 +35,7 @@ var path = d3.geoPath()               // path generator that will convert GeoJSO
 var color = d3.scaleLinear()
     .range(["#ffffcc", "#ffffcc", "#ffeda0", "#fed976", "#feb24c", "#fd8d3c", "#fc4e2a", "#e31a1c", "#bd0026", "#800026"]);
 
-var legendText = ["200+", "146", "138", "130", "122", "114", "106", "98", "90", "0"];
+var legendText = ["33 ¢/kWh", "26", "22", "28", "14", "12", "11", "10", "9", "0"];
 
 
 
@@ -77,7 +77,7 @@ d3.select('#zoom-out').on('click', function () {
 
 // Load in my states data!
 d3.csv("electricity.csv", function (data) {
-    color.domain([0, 90, 98, 106, 114, 122, 130, 138, 146, 300]); // setting the range of the input data
+    color.domain([0, 9, 10, 11, 12, 14, 18, 22, 26, 33]); // setting the range of the input data
 
     // Load GeoJSON data and merge with states data
     d3.json("us-states.json", function (json) {
@@ -123,13 +123,13 @@ d3.csv("electricity.csv", function (data) {
 
         // ----------month filter
         var minMonth=0;
-        var maxMonth=300;
+        var maxMonth=280;
         var min2018=0;
-        var max2018=50;
+        var max2018=33;
         var min2019=0;
-        var max2019=50;
-        var minIncrease=-10;
-        var maxIncrease=10;
+        var max2019=33;
+        var minIncrease=-8;
+        var maxIncrease=8;
         $("#month-slider").slider({
             range: true,
             min: 0,
@@ -151,8 +151,9 @@ d3.csv("electricity.csv", function (data) {
         $("#2018-slider").slider({
             range: true,
             min: 0,
-            max: 50,
-            values: [0, 50],
+            max: 33,
+            step:0.5,
+            values: [0, 33],
             slide: function (event, ui) {
                 min2018 = $("#2018-slider").slider("values", 0);
                 max2018 = $("#2018-slider").slider("values", 1);
@@ -171,8 +172,9 @@ d3.csv("electricity.csv", function (data) {
         $("#2019-slider").slider({
             range: true,
             min: 0,
-            max: 50,
-            values: [0, 50],
+            max: 33,
+            step:0.5,
+            values: [0, 33],
             slide: function (event, ui) {
                 min2019 = $("#2019-slider").slider("values", 0);
                 max2019 = $("#2019-slider").slider("values", 1);
@@ -190,10 +192,10 @@ d3.csv("electricity.csv", function (data) {
         
         $("#increase-slider").slider({
             range: true,
-            min: -10,
-            max: 10,
+            min: -8,
+            max: 8,
             step:0.1,
-            values: [-30, 30],
+            values: [-8, 8],
             slide: function (event, ui) {
                 minIncrease = $("#increase-slider").slider("values", 0);
                 maxIncrease = $("#increase-slider").slider("values", 1);
@@ -224,7 +226,7 @@ d3.csv("electricity.csv", function (data) {
             .attr("width", 100)
             .attr("height", 12)
             .attr("y", 30)
-            .attr("x", 24)
+            .attr("x", 29)
             .style("fill", color)
             .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; });
 
@@ -232,7 +234,7 @@ d3.csv("electricity.csv", function (data) {
         legend.append("text")
             .data(legendText)
             .attr("y", 20)
-            .attr("x", 24)
+            .attr("x", 29)
             .attr("text-anchor", "middle")
             .style("font-size", "2vmin")
             .style("font-weight", "lighter")
@@ -282,13 +284,13 @@ function drawBasemap(json) {
             return d.properties.code;
         })
         .attr("x", function (d) {
-            if (d.properties.code == 'DE') return path.centroid(d)[0] + 18;
-            if (d.properties.code == 'RI') return path.centroid(d)[0] + 8;
-            if (d.properties.code == 'NJ') return path.centroid(d)[0] + 5;
+            if (d.properties.code == 'DE') return path.centroid(d)[0] + 5;
+            if (d.properties.code == 'RI') return path.centroid(d)[0];
+            if (d.properties.code == 'NJ') return path.centroid(d)[0]-5;
             if (d.properties.code == 'LA') return path.centroid(d)[0] - 10;
             if (d.properties.code == 'CA') return path.centroid(d)[0] - 5;
 
-            return path.centroid(d)[0];
+            return path.centroid(d)[0]-10;
         })
         .attr("y", function (d) {
             if (d.properties.code == 'NJ') return path.centroid(d)[1] + 15;
@@ -310,7 +312,7 @@ function setColor(json) { // draws and colours the filtered states
 
         .style("fill", function (d) {
             // Get data value
-            var value = d.properties.rate;
+            var value = d.properties.avg_2019;
            // console.log(d);
             if (value && d.properties.filtered) {
                 //If value exists…
