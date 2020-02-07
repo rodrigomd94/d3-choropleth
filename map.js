@@ -1,24 +1,10 @@
 
-/*  This visualization was made possible by modifying code provided by:
- 
-Scott Murray, Choropleth example from "Interactive Data Visualization for the Web" 
-https://github.com/alignedleft/d3-book/blob/master/chapter_12/05_choropleth.html   
-    	
-Malcolm Maclean, tooltips example tutorial
-http://www.d3noob.org/2013/01/adding-tooltips-to-d3js-graph.html
- 
-Mike Bostock, Pie Chart Legend
-http://bl.ocks.org/mbostock/3888852  */
-//zoom function
-
-
-
 
 //Width and height of map
 var width = 960;
 var height = 570;
 
-var display2018='block;';
+var display2018='none;';
 
 
 // D3 Projection
@@ -215,7 +201,7 @@ d3.csv("electricity.csv", function (data) {
 
         var legend = d3.select("#legend").append("svg")
             .attr("class", "legend")
-            .attr("viewBox", `0 0 940 45`)
+            .attr("viewBox", `0 0 950 45`)
             .selectAll("g")
             .data(color.domain().slice().reverse())
             .enter()
@@ -226,7 +212,7 @@ d3.csv("electricity.csv", function (data) {
             .attr("width", 100)
             .attr("height", 12)
             .attr("y", 30)
-            .attr("x", 29)
+            .attr("x", 35)
             .style("fill", color)
             .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; });
 
@@ -234,7 +220,7 @@ d3.csv("electricity.csv", function (data) {
         legend.append("text")
             .data(legendText)
             .attr("y", 20)
-            .attr("x", 29)
+            .attr("x", 35)
             .attr("text-anchor", "middle")
             .style("font-size", "2vmin")
             .style("font-weight", "lighter")
@@ -266,7 +252,7 @@ function drawBasemap(json) {
                 "<h3>" + d.properties['name'] + "</h3>" +
                 "<p class='tooltip-category' id='2018-tooltip' style='display:"+display2018+"'><b style='color:darkblue;'>2018</b>: " + d.properties['avg_2018'] + " ¢/kWh</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>2019</b>: " + d.properties['avg_2019'] + " ¢/kWh</p>" +
-                "<p class='tooltip-category'><b style='color:darkblue'>Change in 2019</b>: " + value + "</p>" +
+                "<p class='tooltip-category'><b style='color:darkblue'>Change</b>: " + value + "</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>Avg monthly Bill:</b> $." + d.properties['month_rate'] + "</p>" +
                 "</div>";
 
