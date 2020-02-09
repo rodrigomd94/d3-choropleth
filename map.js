@@ -2,7 +2,7 @@
 
 //Width and height of map
 var width = 960;
-var height = 570;
+var height = 650;
 
 var display2018='none;';
 
@@ -41,8 +41,9 @@ var tooltip = d3.select('body')
     .append('div')
     .attr('class', 'tooltip');
 
-
+    var k=1; // variable to store svg scale
 var zoom = d3.zoom()
+    .scaleExtent([0.7, 1.6])    
     .on('zoom', function () {
         canvas.attr('transform', d3.event.transform);
     });
@@ -223,7 +224,7 @@ d3.csv("electricity.csv", function (data) {
             .attr("y", 20)
             .attr("x", 115)
             .attr("text-anchor", "middle")
-            .style("font-size", "2vmin")
+            .style("font-size", "17px")
             .style("font-weight", "lighter")
             .attr("transform", function (d, i) { return "translate(" + i * 100 + ", 0)"; })
             .text(function (d) { return d; })
@@ -256,8 +257,13 @@ function drawBasemap(json) {
                 "<p class='tooltip-category'><b style='color:darkblue'>Change</b>: " + value + "</p>" +
                 "<p class='tooltip-category'><b style='color:darkblue'>Avg monthly Bill:</b> $" + d.properties['month_rate'] + "</p>" +
                 "</div>";
-
-            tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
+                const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+                if (event.pageX > 0.66*vw){
+                    tooltip.style("top", (event.pageY - 20) + "px").style("right", (vw-event.pageX+10) + "px").style("left", "");
+                 }else{
+                   tooltip.style("top", (event.pageY - 20) + "px").style("left", (event.pageX + 10) + "px").style("right", "");
+                 } 
+            //tooltip.style("top", (event.pageY - 10) + "px").style("left", (event.pageX + 10) + "px");
             tooltip.html(html);
         })
         .on("mouseout", (d) => {
